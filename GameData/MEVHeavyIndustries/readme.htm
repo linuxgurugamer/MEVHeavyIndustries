@@ -1,362 +1,631 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'><style type='text/css'>html {overflow-x: initial !important;}</style>
+<style type='text/css'  id="style-base">:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI Emoji", "SF Pro", sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p *, #write.first-line-indent svg * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; height: auto; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+svg sub, svg sup { position: static; }
+.nodeLabel p { padding-right: 2px; padding-left: 2px; }
+.typora-export .nodeLabel p { padding-right: 0px; padding-left: 0px; }
+foreignobject { overflow: visible; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+li p { orphans: 1; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+</style>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&amp;subset=latin,latin-ext' type='text/css' />
+<style type='text/css'  id="style-theme_css">:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', 'SF Pro', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
 
 
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
 
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
 
-<p><a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/209730-*/"
-title="MEVHeavyIndustries Forum Thread"><img
-src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/mod.json"
-alt="MEV Heavy Industries" /></a> <a
-href="https://kerbalspaceprogram.com/" title="Kerbal Space Program"><img
-src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/ksp.json&amp;logo=data:image/webp;base64,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"
-title="Kerbal Space Program" alt="KSP version" /></a> <a
-href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-title="CC BY-NC-SA 4.0"><img
-src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/license.json"
-title="CC BY-NC-SA 4.0" alt="License" /></a><br />
-<a href="https://www.curseforge.com/kerbal/ksp-mods/MEVHeavyIndustries"
-title="Curseforge"><img
-src="https://img.shields.io/badge/CurseForge-Link-CCFF00.svg?labelColor=6441A4&amp;style=plastic&amp;logo=curseforge"
-title="Curseforge" alt="Curseforge" /></a> <a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/"
-title="GitHub"><img
-src="https://img.shields.io/badge/Github-Link-CCFF00.svg?labelColor=181717&amp;style=plastic&amp;logo=github"
-title="GitHub" alt="GitHub" /></a> <a
-href="http://spacedock.info/mod/2621" title="SpaceDock"><img
-src="https://img.shields.io/badge/SpaceDock-Link-CCFF00.svg?labelColor=181717&amp;style=plastic&amp;logo=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MDAgNTAwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MDAgNTAwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzFBMUExQTt9Cgkuc3Qxe2ZpbGw6IzA1Nzg5Mzt9Cgkuc3Qye2ZpbGw6IzA3QUNEMjt9Cjwvc3R5bGU+CjxwYXRoIGlkPSJYTUxJRF8xXyIgY2xhc3M9InN0MCIgZD0iTTQwMCwwLjZIMTAwYy01NSwwLTEwMCw0NS0xMDAsMTAwVjQwMGMwLDU1LDQ1LDEwMCwxMDAsMTAwaDMwMGM1NSwwLDEwMC00NSwxMDAtMTAwVjEwMC42CglDNTAwLDQ1LjYsNDU1LDAuNiw0MDAsMC42eiIvPgo8ZyBpZD0iWE1MSURfNl8iPgoJPGcgaWQ9IlhNTElEXzlfIj4KCQk8cGF0aCBpZD0iWE1MSURfMTdfIiBjbGFzcz0ic3QxIiBkPSJNMTgzLjMsMTY1LjljNi40LTMuNiwxNi45LTMuNiwyMy4zLDBMNDY3LjQsMzE0YzYuNCwzLjYsNi40LDkuNiwwLDEzLjJMMjA2LjYsNDc0LjQKCQkJYy02LjQsMy42LTE3LjcsNi42LTI1LDYuNmgtNDQuOGMtNy40LDAtOC4xLTMtMS43LTYuNmwyNjEtMTQ3LjJjNi40LTMuNiw2LjQtOS42LDAtMTMuMkwxNzEsMTg2Yy02LjQtMy42LTYuNC05LjYsMC0xMy4yCgkJCUwxODMuMywxNjUuOXoiLz4KCTwvZz4KCTxnIGlkPSJYTUxJRF84XyI+CgkJPHBhdGggaWQ9IlhNTElEXzE2XyIgY2xhc3M9InN0MiIgZD0iTTMxOC44LDE5Yy03LjQsMC0xOC42LDIuOC0yNSw2LjRMMzMsMTczLjRjLTYuNCwzLjYtNi40LDkuNSwwLDEzLjFsMjYwLjcsMTQ3LjEKCQkJYzYuNCwzLjYsMTYuOSwzLjYsMjMuMywwbDEyLjMtN2M2LjQtMy42LDYuNC05LjUsMC0xMy4ybC0yMjUuMS0xMjdjLTYuNC0zLjYtNi40LTkuNSwwLTEzLjJMMzY1LjYsMjUuNGM2LjQtMy42LDUuNi02LjQtMS43LTYuNAoJCQlIMzE4Ljh6Ii8+Cgk8L2c+CjwvZz4KPC9zdmc+Cg=="
-title="SpaceDock" alt="SpaceDock" /></a> <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN"><img
-src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/ckan.json"
-title="CKAN" alt="CKAN" /></a><br />
-<a href="https://zer0kerbal.github.io/MEVHeavyIndustries"
-title="GitHub Pages"><img
-src="https://img.shields.io/badge/GitHub-Pages-white?style=plastic&amp;labelColor=9cf&amp;logoColor=181717&amp;logo=github"
-title="GitHub IO" alt="Pages" /></a></p>
-<h1 id="mev-heavy-industries-mev">MEV Heavy Industries (MEV)</h1>
-<p>Daedalus, Bussard and Epstein drives for Kerbal Space Program.</p>
-<p>Daedalus drive requires <a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/172026-*/"
-title="KSP Interstellar Extended (KSPIE)">KSP Interstellar
-Extended</a></p>
-<h2 id="by-zer0kerbal-originally-by-cyne">By <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/"
-title="zer0Kerbal"><code>zer0Kerbal</code></a>, originally by <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/"
-title="Cyne"><code>Cyne</code></a></h2>
-<p>adopted with <em>express</em> permission and brought to you by
-<em>KerbSimpleCo</em></p>
-<img src="https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/img/HeroLogo_1920x1920.png" alt="MEVHeavyIndustries Hero" width="50%" height="50%">
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
 
-<h3 id="preamble-by-cyne">Preamble by <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/"
-title="Cyne">Cyne</a></h3>
-<blockquote>
-<p>This mod is a small collection of parts that I've made to use
-alongside KSPIE parts, since I've been irritated at how some of the
-engines look (Daedalus, Bussard and Epstein drive) Currently includes a
-Daedalus Drive, Bussard drive and two Epstein drives (5m and 2.5m)</p>
-</blockquote>
-<hr />
-<h3 id="see-more">See more</h3>
-<blockquote>
-<ul>
-<li><a href="https://zer0kerbal.github.io/MEVHeavyIndustries"
-title="GitHub Pages">GitHub Pages</a></li>
-<li><a href="https://zer0kerbal.github.io/MEVHeavyIndustries/Marketing"
-title="Marketing Slicks">Marketing Slicks</a></li>
-<li><a
-href="https://zer0kerbal.github.io/MEVHeavyIndustries/PartsCatalog"
-title="Parts Catalog">Parts Catalog</a> for part pictures</li>
-<li><a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/discussions"
-title="Discussions">Discussions</a> or <a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/209730-*/"
-title="MEVHeavyIndustries Forum Thread">KSP Forums</a> for discussions
-and news on this mod</li>
-<li><a
-href="https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/changelog.md"
-title="Changelog">ChangeLog</a> for more details of changes</li>
-<li><a href="https://github.com/zer0Kerbal/MEVHeavyIndustries/issues"
-title="Issues">Known Issues</a> for more details of feature requests and
-known issues</li>
-</ul>
-</blockquote>
-<hr />
-<h3 id="youtube-review-by-kottabos-gaming">YouTube review by <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/36583-*/"><code>Kottabos Gaming</code></a></h3>
-<p><a href="https://www.youtube.com/watch?v=WbkVRbZsqGI"><img
-src="https://img.youtube.com/vi/WbkVRbZsqGI/0.jpg"
-alt="KSP Mods - MEV Heavy Industries" /></a></p>
-<h3 id="help-wanted">Help Wanted</h3>
-<blockquote>
-<ul>
-<li>Compatibility patches</li>
-<li>Contracts for these glorious parts</li>
-<li>Variant Textures</li>
-<li>Model updates to Unity 2019</li>
-<li>Marketing Images and Videos such as hero shots, animated gifs, short
-highlight</li>
-<li>Have a request? Glad to have them, kindly submit through <a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/issues"
-title="Issues">GitHub</a>.</li>
-</ul>
-</blockquote>
-<hr />
-<h3 id="localization">Localization</h3>
-<blockquote>
-<ul>
-<li><img
-src="https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/master/img/EN.png"
-title="English" alt="English" /> English</li>
-<li><em><strong>your translation here</strong></em></li>
-</ul>
-<p>HELP WANTED - See the <a
-href="https://github.com/zer0Kerbal/zer0Kerbal/blob/master/Localization/readme.md"
-title="Localization Readme">README in the Localization folder</a> or the
-<a
-href="https://github.com/zer0Kerbal/zer0Kerbal/blob/master/Localization/quickstart.md"
-title="Quickstart">Quickstart Guide</a> for instructions for adding or
-improving translations. <a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/"
-title="GitHub">GitHub</a> push is the best way to contribute.
-<em>Additions and corrections welcome!</em></p>
-</blockquote>
-<hr />
-<h3 id="installation-directions-">Installation Directions <a href="#fn1"
-class="footnote-ref" id="fnref1"
-role="doc-noteref"><sup>1</sup></a></h3>
-<p><em><strong>Use</strong></em> CurseForge/OverWolf App (currently does
-not install dependencies)</p>
-  <a href="https://download.curseforge.com/">
-    <img src="https://www.overwolf.com/brand-guidelines/img/logo2.svg" alt="CurseForge/OverWolf App" width="25%" height="25%">
-</a>
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
 
-<p>I take no part, nor am I interested in maintaining the <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN">CKAN</a> mod metadata for my mods. <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN">CKAN</a> is a great mod for those that can't use zip tools.
-If you are having issues please let the <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN">CKAN</a> people know and refer to the <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN">CKAN</a> thread. My support of <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN">CKAN</a> extends as far as me checking the checkbox in
-Spacedock when I upload. Beware, <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN">CKAN</a> <em>can</em> really mess up though it tries very,
-very, very hard not to.</p>
-<p>or <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/197082-*/"
-title="CKAN"><img src="https://i.postimg.cc/x8XSVg4R/sj507JC.png"
-title="CKAN" alt="CKAN" /></a></p>
-<h3 id="dependencies">Dependencies</h3>
-<ul>
-<li><a href="https://kerbalspaceprogram.com/"
-title="Kerbal Space Program">Kerbal Space Program</a> <a
-href="https://kerbalspaceprogram.com/" title="Kerbal Space Program"><img
-src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/ksp.json&amp;logo=data:image/webp;base64,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"
-title="Kerbal Space Program" alt="Kerbal Space Program" /></a> <a
-href="#fn2" class="footnote-ref" id="fnref2"
-role="doc-noteref"><sup>2</sup></a></li>
-</ul>
-<h3 id="suggests">Suggests</h3>
-<ul>
-<li><a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/187625-*/"
-title="On Demand Fuel Cells (ODFC)">On Demand Fuel Cells (ODFC)</a></li>
-<li><a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/207732-*/"
-title="GPO SpeedPump (GPO)">GPO (Goo Pumps &amp; Oils') Speed Pump
-(GPO)</a></li>
-</ul>
-<h3 id="supports">Supports</h3>
-<ul>
-<li>Either <a href="#fn3" class="footnote-ref" id="fnref3"
-role="doc-noteref"><sup>3</sup></a>
-<ul>
-<li><a href="https://github.com/net-lisias-ksp/ModuleManager"
-title="Module Manager /L">Module Manager /L</a></li>
-<li><a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/50533-*/"
-title="Module Manager">Module Manager</a></li>
-</ul></li>
-<li><a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/172026-*/"
-title="KSP Interstellar Extended (KSPIE)">KSP Interstellar Extended
-(KSPIE)</a></li>
-<li><a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/106243-*/"
-title="Interstellar Fuel Switch (Core)">Interstellar Fuel Switch
-(Core)</a> or <a
-href="http://forum.kerbalspaceprogram.com/index.php?/topic/106243-*/"
-title="Interstellar Fuel Switch">Interstellar Fuel Switch</a></li>
-<li><a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/179030-*/"
-title="TweakScale">TweakScale (TWK)</a></li>
-</ul>
-<h3 id="tags">Tags</h3>
-<p>parts, config</p>
-<div style="border:0.5px solid Tomato; background-color: #BADA55; color: #FF0000; text-align:center">
-  <p><b>red box below is a link to forum post on how to get support</b></p>
-  <a href="https://forum.kerbalspaceprogram.com/index.php?/topic/83212-*">
-    <p><img src="https://i.postimg.cc/vHP6zmrw/image.png" alt="How to get support"></p></a>
-  <p style="color: #000000;">Be Kind: Lithobrake, not jakebrake! Keep your Module Manager up to date</p>
-</div>
+.md-mathjax-midline {
+    background: #fafafa;
+}
 
-<h3 id="credits-and-special-thanks">Credits and Special Thanks</h3>
-<ul>
-<li><a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/"
-title="Cyne">Cyne</a> for creating this glorious parts addon!</li>
-<li>see <a
-href="https://zer0kerbal.github.io/MEVHeavyIndustries/Attributions"
-title="Attribution">Attribution.md</a> for more comprehensive list</li>
-</ul>
-<h3 id="legal-mumbo-jumbo-license-provenance">Legal Mumbo Jumbo (License
-<em>provenance</em>)</h3>
-<h4 id="current-1---zer0kerbal">Current (1) - <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/"
-title="zer0Kerbal"><code>zer0Kerbal</code></a></h4>
-<blockquote>
-<p>Forum: <a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/209730-*/"
-title="MEVHeavyIndustries Forum Thread">Thread</a> - Source: <a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/"
-title="GitHub">GitHub</a><br />
-License: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-title="CC BY-NC-SA 4.0"><img
-src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/license.json"
-title="CC BY-NC-SA 4.0" alt="License" /></a> <img
-src="https://licensebuttons.net/i/l/by-nc-sa/transparent/33/66/99/76x22.png"
-title="CC BY-NC-SA 4.0" alt="License" /></p>
-<h5 id="disclaimers">Disclaimer(s)</h5>
-<p><em><strong>All bundled mods are distributed under their own
-licenses</strong></em><br />
-<em><strong>All assets, including but not limited to: animations,
-models, sounds and textures are distributed under their own
-licenses</strong></em></p>
-</blockquote>
-<h5 id="see-noticesmd-for-more-legal-mumbo-jumbo">see <a
-href="https://zer0kerbal.github.io/MEVHeavyIndustries/Notices"
-title="Notices">Notices.md</a> for more <em>legal mumbo jumbo</em></h5>
-<h4 id="original-0---author-cyne">Original (0) - Author: <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/"
-title="Cyne"><code>Cyne</code></a></h4>
-<blockquote>
-<p>Forum: <a
-href="https://forum.kerbalspaceprogram.com/index.php?/topic/64520-*/"
-title="KSP Forum">Thread</a> - Download: <a
-href="http://spacedock.info/mod/2621" title="SpaceDock">SpaceDock</a> -
-Source: <a href="http://spacedock.info/mod/2621"
-title="SpaceDock">SpaceDock</a><br />
-License: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-title="CC BY-NC-SA 4.0"><img
-src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-ef9421?labelColor=black&amp;style=plastic&amp;logoColor=ef9421&amp;logo=creativecommons"
-title="CC BY-NC-SA 4.0" alt="License" /></a> <img
-src="https://licensebuttons.net/i/l/by-nc-sa/transparent/33/66/99/76x22.png"
-title="CC BY-NC-SA 4.0" alt="License" /></p>
-</blockquote>
-<hr />
-<h3
-id="donations-how-to-support-this-and-other-great-mods-by-zer0kerbal">DONATIONS:
-How to support this and other great mods by <a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/"
-title="zer0Kerbal"><code>zer0Kerbal</code></a></h3>
-<blockquote>
-<p><em><strong>Completely voluntary, absolutely amazing, and really does
-help me out a lot!</strong></em> quote from
-<a href="https://forum.kerbalspaceprogram.com/index.php?/profile/32393-*/"><img alt="cybutek" src="https://kerbal-forum-uploads.s3.us-west-2.amazonaws.com/monthly_2020_06/kappa-kerbal-anarchy.thumb.png.673a2f6f7b36cc60a35c24efef217246.png" width="25px" height="25px">
-cybutek</a> creator of
-<a href="https://forum.kerbalspaceprogram.com/index.php?/topic/17833-130-*/" alt="Kerbal Engineer Redux (KER)">
-Kerbal Engineer</a></p>
-</blockquote>
-<p><a
-href="https://www.paypal.com/donate?hosted_button_id=DC22YHMEJREKL/"
-title="PayPal"><img
-src="https://img.shields.io/badge/Buy%20me%20some%20-LFO-BADA55?style=for-the-badge&amp;logo=paypal&amp;labelColor=FFDD00/"
-title="PayPal" alt="Support" /></a> <a
-href="https://github.com/sponsors/zer0Kerbal/"
-title="Github Sponsors"><img
-src="https://img.shields.io/badge/Github%20-Sponsor-EA4AAA?style=for-the-badge&amp;logo=githubsponsors/"
-title="Github Sponsors" alt="Github Sponsor" /></a> <a
-href="https://www.patreon.com/bePatron?u=23390503/" title="Patreon"><img
-src="https://img.shields.io/badge/Patreon%20-Patreonize-FF424D?style=for-the-badge&amp;logo=patreon/"
-title="Patreon" alt="Patreon" /></a> <a
-href="https://buymeacoffee.com/zer0Kerbal/" title="Buy Me A Snack"><img
-src="https://img.shields.io/badge/Buy%20Me%20a%20-Snack!-FFDD00?style=for-the-badge&amp;logo=buymeacoffee/"
-title="Buy Me A Snack" alt="Buy zer0Kerbal a snack" /></a></p>
-<p><em>and it is true.</em></p>
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
 
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
 
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
 
+.sidebar-tabs {
+    border-bottom: none;
+}
 
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
 
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
 
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
 
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
 
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
 
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
 
+.mac-os #write{
+    caret-color: AccentColor;
+}
 
+.md-lang {
+    color: #b4654d;
+}
 
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
 
+#md-notification .btn {
+    border: 0;
+}
 
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
 
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
 
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
 
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+</style>
+<style type='text/css'  id="style-lp">ol, ul {padding-left: 40px}</style>
 
+<title>readme</title>
+</head>
+<body class='typora-export os-windows typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#mev-heavy-industries-mev">MEV Heavy Industries (MEV)</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#by-zer0kerbal-and-lisias-originally-by-cyne">By <code>zer0Kerbal</code> and <code>Lisias</code>, originally by <code>Cyne</code></a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#preamble-by-cyne">Preamble by Cyne</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#see-more">See more</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#youtube-review-by-kottabos-gaming">YouTube review by <code>Kottabos Gaming</code></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#help-wanted">Help Wanted</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#localization">Localization</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#installation-directions">Installation Directions</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#supports">Supports</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#credits-and-special-thanks">Credits and Special Thanks</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#legal-mumbo-jumbo-license-provenance">Legal Mumbo Jumbo (License <em>provenance</em>)</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#current-1---zer0kerbal-and-lisias">Current (1) - <code>zer0Kerbal</code> and <code>Lisias</code></a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h5"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#see-noticesmd-for-more-legal-mumbo-jumbo">see Notices.md for more <em>legal mumbo jumbo</em></a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#original-0---author-cyne">Original (0) - Author: <code>Cyne</code></a></div><ul class="outline-children"></ul></li></ul></li></ul></li></ul></li></div></div><div id='write'  class=''><!-- readme.md v1.7.0.0
+MEV Heavy Industries (MEV)
+created: 17 Jul 2017
+updated: 24 May 2026 --><!--THIS FILE: Copyright © All Rights Reserved by zer0Kerbal--><p><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/209730-*/' target='_blank' title='MEVHeavyIndustries Forum Thread'><span class='md-image'><img alt='MEV Heavy Industries' src='https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/json/mod.json''></img></span></a><span></span><br/><a href='https://www.curseforge.com/kerbal/ksp-mods/MEVHeavyIndustries' target='_blank' title='Curseforge'><span class='md-image'><img alt='Curseforge' src='https://img.shields.io/badge/CurseForge-Link-CCFF00.svg?labelColor=6441A4&amp;style=plastic&amp;logo=curseforge' title='Curseforge''></img></span></a><span> </span><a href='https://github.com/zer0Kerbal/MEVHeavyIndustries/' target='_blank' title='GitHub'><span class='md-image'><img alt='GitHub' src='https://img.shields.io/badge/Github-Link-CCFF00.svg?labelColor=181717&amp;style=plastic&amp;logo=github' title='GitHub''></img></span></a><span> </span>
+<a href='https://zer0kerbal.github.io/MEVHeavyIndustries' target='_blank' title='GitHub Pages'><span class='md-image'><img alt='Pages' src='https://img.shields.io/badge/GitHub-Pages-white?style=plastic&amp;labelColor=9cf&amp;logoColor=181717&amp;logo=github' title='GitHub IO''></img></span></a></p><h1 id='mev-heavy-industries-mev'><span>MEV Heavy Industries (MEV)</span></h1><p><span>Daedalus, Bussard and Epstein drives for Kerbal Space Program.</span></p><p><span>Daedalus drive requires </span><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/172026-*/' target='_blank' title='KSP Interstellar Extended (KSPIE)'><span>KSP Interstellar Extended</span></a></p><h2 id='by-zer0kerbal-and-lisias-originally-by-cyne'><span>By </span><a href='https://github.com/zer0Kerbal' target='_blank' title='zer0Kerbal'><code>zer0Kerbal</code></a><span> and </span><a href='https://github.com/Lisias' target='_blank' title='Lisias'><code>Lisias</code></a><span>, originally by </span><a href='https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/' target='_blank' title='Cyne'><code>Cyne</code></a></h2><p><span>adopted with </span><em><span>express</span></em><span> permission and brought to you by </span><em><span>KerbSimpleCo</span></em></p><p><img src="https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/img/HeroLogo_1920x1920.png" alt="MEVHeavyIndustries Hero" width="50%" height="50%"></p><h3 id='preamble-by-cyne'><span>Preamble by </span><a href='https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/' target='_blank' title='Cyne'><span>Cyne</span></a></h3><blockquote><p><span>This mod is a small collection of parts that I&#39;ve made to use alongside KSPIE parts, since I&#39;ve been irritated at how some of the engines look (Daedalus, Bussard and Epstein drive) Currently includes a Daedalus Drive, Bussard drive and two Epstein drives (5m and 2.5m)</span></p></blockquote><hr /><h3 id='see-more'><span>See more</span></h3><blockquote><ul><li><p><a href='https://zer0kerbal.github.io/MEVHeavyIndustries' target='_blank' title='GitHub Pages'><span>GitHub Pages</span></a></p></li><li><p><a href='https://zer0kerbal.github.io/MEVHeavyIndustries/Marketing' target='_blank' title='Marketing Slicks'><span>Marketing Slicks</span></a></p></li><li><p><a href='https://zer0kerbal.github.io/MEVHeavyIndustries/PartsCatalog' target='_blank' title='Parts Catalog'><span>Parts Catalog</span></a><span> for part pictures</span></p></li><li><p><a href='https://github.com/zer0Kerbal/MEVHeavyIndustries/discussions' target='_blank' title='Discussions'><span>Discussions</span></a><span> or </span><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/209730-*/' target='_blank' title='MEVHeavyIndustries Forum Thread'><span>KSP Forums</span></a><span> for discussions and news on this mod</span></p></li><li><p><a href='https://raw.githubusercontent.com/zer0Kerbal/MEVHeavyIndustries/master/changelog.md' target='_blank' title='Changelog'><span>ChangeLog</span></a><span> for more details of changes</span></p></li><li><p><a href='https://github.com/zer0Kerbal/MEVHeavyIndustries/issues' target='_blank' title='Issues'><span>Known Issues</span></a><span> for more details of feature requests and known issues</span></p></li></ul></blockquote><hr /><h3 id='youtube-review-by-kottabos-gaming'><span>YouTube review by </span><a href='https://forum.kerbalspaceprogram.com/index.php?/profile/36583-*/'><code>Kottabos Gaming</code></a></h3><p><a href='https://www.youtube.com/watch?v=WbkVRbZsqGI'><img src="https://img.youtube.com/vi/WbkVRbZsqGI/0.jpg" alt="KSP Mods - MEV Heavy Industries"></a></p><h3 id='help-wanted'><span>Help Wanted</span></h3><blockquote><ul><li><p><span>Compatibility patches</span></p></li><li><p><span>Contracts for these glorious parts</span></p></li><li><p><span>Variant Textures</span></p></li><li><p><span>Have a request? Glad to have them, kindly submit through </span><a href='https://github.com/zer0Kerbal/MEVHeavyIndustries/issues' target='_blank' title='Issues'><span>GitHub</span></a><span>.</span></p></li></ul></blockquote><hr /><h3 id='localization'><span>Localization</span></h3><blockquote><ul><li><p><span class='md-image'><img alt='English' src='https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/master/img/EN.png' title='English''></img></span><span> English</span></p></li><li><p><em><strong><span>your translation here</span></strong></em></p></li></ul><p><span>HELP WANTED - See the </span><a href='https://github.com/zer0Kerbal/zer0Kerbal/blob/master/Localization/readme.md' target='_blank' title='Localization Readme'><span>README in the Localization folder</span></a><span> or the </span><a href='https://github.com/zer0Kerbal/zer0Kerbal/blob/master/Localization/quickstart.md' target='_blank' title='Quickstart'><span>Quickstart Guide</span></a><span> for instructions for adding or improving translations. </span><a href='https://github.com/zer0Kerbal/MEVHeavyIndustries/' target='_blank' title='GitHub'><span>GitHub</span></a><span> push is the best way to contribute. </span><em><span>Additions and corrections welcome!</span></em></p></blockquote><hr /><h3 id='installation-directions'><span>Installation Directions</span></h3><p><em><strong><span>Use</span></strong></em>
+<span>  CurseForge/OverWolf App (currently does not install dependencies)  </span></p><p><span>I take no part, nor am I interested in maintaining the </span>[<span>CKAN</span>][ckan:url]<span> mod metadata for my mods. </span>[<span>CKAN</span>][ckan:url]<span> is a great mod for those that can&#39;t use zip tools. If you are having issues please let the </span>[<span>CKAN</span>][ckan:url]<span> people know and refer to the </span>[<span>CKAN</span>][ckan:url]<span> thread. Beware, </span>[<span>CKAN</span>][ckan:url]<span> </span><em><span>can</span></em><span> really mess up though it tries very, very, very hard not to.</span></p><h3 id='supports'><span>Supports</span></h3><ul><li><p><span>Either</span></p><ul><li><p><a href='https://github.com/net-lisias-ksp/ModuleManager' target='_blank' title='Module Manager /L'><span>Module Manager /L</span></a></p></li><li><p><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/50533-*/' target='_blank' title='Module Manager'><span>Module Manager</span></a></p></li></ul></li><li><p><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/172026-*/' target='_blank' title='KSP Interstellar Extended (KSPIE)'><span>KSP Interstellar Extended (KSPIE)</span></a></p></li><li><p><a href='http://forum.kerbalspaceprogram.com/index.php?/topic/106243-*/' target='_blank' title='Interstellar Fuel Switch (Core)'><span>Interstellar Fuel Switch (Core)</span></a><span> or </span><a href='http://forum.kerbalspaceprogram.com/index.php?/topic/106243-*/' target='_blank' title='Interstellar Fuel Switch'><span>Interstellar Fuel Switch</span></a></p></li><li><p><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/179030-*/' target='_blank' title='TweakScale'><span>TweakScale (TWK)</span></a></p></li><li><p><span>Community Tech Tree</span></p></li></ul><h3 id='credits-and-special-thanks'><span>Credits and Special Thanks</span></h3><ul><li><p><a href='https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/' target='_blank' title='Cyne'><span>Cyne</span></a><span> for creating this glorious parts addon!</span></p></li><li><p><span>see </span><a href='https://zer0kerbal.github.io/MEVHeavyIndustries/Attributions' target='_blank' title='Attribution'><span>Attribution.md</span></a><span> for more comprehensive list</span></p></li></ul><h3 id='legal-mumbo-jumbo-license-provenance'><span>Legal Mumbo Jumbo (License </span><em><span>provenance</span></em><span>)</span></h3><p><span>Distribution permitted ONLY throught CurseForge/Overwolf through specific licensing.</span></p><h4 id='current-1---zer0kerbal-and-lisias'><span>Current (1) - </span><a href='https://github.com/zer0Kerbal' target='_blank' title='zer0Kerbal'><code>zer0Kerbal</code></a><span> and </span><a href='https://github.com/Lisias' target='_blank' title='Lisias'><code>Lisias</code></a></h4><blockquote><p><span>License:</span>
+<span>Copyright © - All Rights Reserved.</span>
+<span>Distrubution only permitted through authorized Curseforge/Overwolf listing.</span></p><h5 id='disclaimers'><span>Disclaimer(s)</span></h5><p><em><strong><span>All bundled mods are distributed under their own licenses</span></strong></em><span></span><br/><em><strong><span>All assets, including but not limited to: animations, models, sounds and textures are distributed under their own licenses</span></strong></em></p></blockquote><h5 id='see-noticesmd-for-more-legal-mumbo-jumbo'><span>see </span><a href='https://zer0kerbal.github.io/MEVHeavyIndustries/Notices' target='_blank' title='Notices'><span>Notices.md</span></a><span> for more </span><em><span>legal mumbo jumbo</span></em></h5><h4 id='original-0---author-cyne'><span>Original (0) - Author: </span><a href='https://forum.kerbalspaceprogram.com/index.php?/profile/206520-*/' target='_blank' title='Cyne'><code>Cyne</code></a></h4><blockquote><p><span>Forum: </span><a href='https://forum.kerbalspaceprogram.com/index.php?/topic/64520-*/' target='_blank' title='KSP Forum'><span>Thread</span></a><span> - Download: </span><a href='http://spacedock.info/mod/2621' target='_blank' title='SpaceDock'><span>SpaceDock</span></a><span> - Source: </span><a href='http://spacedock.info/mod/2621' target='_blank' title='SpaceDock'><span>SpaceDock</span></a><span></span><br/><span>License: </span><a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' target='_blank' title='CC BY-NC-SA 4.0'><span class='md-image'><img alt='License' src='https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-ef9421?labelColor=black&amp;style=plastic&amp;logoColor=ef9421&amp;logo=creativecommons' title='CC BY-NC-SA 4.0''></img></span></a><span> </span><span class='md-image'><img alt='License' src='https://licensebuttons.net/i/l/by-nc-sa/transparent/33/66/99/76x22.png' title='CC BY-NC-SA 4.0''></img></span></p></blockquote><!-- mod links --><!--- mod --><!--- mod provenance --><!--- license provenance --><!--- release links --><!-- Localization --></div></div>
 
-
-<hr />
-<h4 id="connect-with-me">Connect with me</h4>
-<p>Track progress: issues <a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/issues"
-title="Issues">here</a> and projects <a
-href="https://github.com/zer0Kerbal/MEVHeavyIndustries/projects/">here</a>
-along with <strong><a
-href="https://github.com/users/zer0Kerbal/projects/27">The Short
-List</a></strong></p>
-<p><a
-href="https://forum.kerbalspaceprogram.com/index.php?/profile/190933-*/"
-title="zer0Kerbal"><img align="left" alt="zer0Kerbal | kerbalspaceprogram.com" width="32px" src="https://cdn.icon-icons.com/icons2/1381/PNG/32/kerbalspaceprogram_93898.png" /></a>
-<a
-href="https://www.curseforge.com/members/zer0kerbal/projects"><img align="left" alt="zer0Kerbal | CurseForge" width="32px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/curseforge.svg" /></a>
-<a
-href="https://www.reddit.com/user/zer0Kerbal"><img align="left" alt="zer0Kerbal | reddit" width="32px" src="https://cdn.icon-icons.com/icons2/1945/PNG/512/iconfinder-reddit-4661631_122483.png" /></a>
-<a href="https://www.patreon.com/bePatron?u=23390503/"
-title="Patreon"><img align="left" alt="zer0Kerbal | Patreon" width="32px" src="https://cdn.icon-icons.com/icons2/2429/PNG/512/patreon_logo_icon_147253.png" /></a>
-<a
-href="https://www.youtube.com/@zer0Kerbal"><img align="left" alt="zer0Kerbal | YouTube" width="32px" src="https://cdn.icon-icons.com/icons2/836/PNG/512/Youtube_icon-icons.com_66802.png" /></a>
-<a
-href="https://www.twitch.tv/zer0kerbal"><img align="left" alt="zer0Kerbal | Twitch" width="32px" src="https://cdn.icon-icons.com/icons2/2699/PNG/512/twitch_logo_icon_170383.png" /></a>
-<a href="https://www.paypal.com/donate?hosted_button_id=DC22YHMEJREKL/"
-title="PayPal"><img align="left" alt="zer0Kerbal | PayPal" width="32px" src="https://cdn.icon-icons.com/icons2/2699/PNG/512/paypal_logo_icon_168055.png" /></a>
-<a href="https://buymeacoffee.com/zer0Kerbal/"
-title="Buy Me A Snack"><img align="left" alt="zer0Kerbal | Buy Me a Coffee" width="32px" src="https://www.buymeacoffee.com/assets/img/bmc-meta-new/new/favicon.ico" /></a>
-<a
-href="https://twitter.com/zer0Kerbal"><img align="left" alt="zer0Kerbal | Twitter" width="32px" src="https://raw.githubusercontent.com/zer0Kerbal/zer0Kerbal/master/img/twitter-32.ico" /></a></br></p>
-<h5 id="release-schedule">Release Schedule</h5>
-<ol type="1">
-<li>GitHub, reaching first manual installers and users of KSP-AVC. Right
-now.</li>
-<li>CurseForge. Right now.</li>
-<li>SpaceDock (and CKAN users). Soon™</li>
-</ol>
-
-
-<section id="footnotes" class="footnotes footnotes-end-of-document"
-role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1"><p>this isn't a mod. ;P<a href="#fnref1"
-class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><em><strong>may</strong></em> work on other versions
-(YMMV)<a href="#fnref2" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><em>Be Kind: Lithobrake, not jakebrake! Keep your Module
-Manager up to date!</em><a href="#fnref3" class="footnote-back"
-role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+<script>(function(){function e(e,n,i){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var t=e.target;t&&t!=this;t=t.parentNode)if(t.matches(n)){!1===i.call(t,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)}var t=document.body.parentElement,i=[],r=null,o=document.body.classList.contains("typora-export-collapse-outline");function a(){return t.scrollTop}e("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),u(),!1}),e("click",".outline-item",function(e){var t=this.querySelector(".outline-label");location.hash=t.getAttribute("href"),o&&((t=this.closest(".outline-item-wrapper").classList).contains("outline-item-open")||t.add("outline-item-open"),d(),t.add("outline-item-active"))});function s(){var e=a();r=null;for(var t=0;t<i.length&&i[t][1]-e<60;t++)r=i[t]}function n(){c=setTimeout(function(){var n;i=[],n=a(),document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(e=>{var t=e.getAttribute("id");i.push([t,n+e.getBoundingClientRect().y])}),s(),u()},300)}var l,c,d=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},u=function(){if(r&&(d(),t=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(r[0]):r[0])+'"]')))if(o){var e=t.closest(".outline-item-open>ul>.outline-item-wrapper");if(e)e.classList.add("outline-item-active");else{for(var t,n=(t=t.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");n;)n=(t=n).parentElement.closest(".outline-item-wrapper");t.classList.add("outline-item-active")}}else t.closest(".outline-item-wrapper").classList.add("outline-item-active")};window.addEventListener("scroll",function(e){l&&clearTimeout(l),l=setTimeout(function(){s(),u()},300)});window.addEventListener("resize",function(e){c&&clearTimeout(c),n()}),n()})();</script></body>
+</html>
